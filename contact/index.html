@@ -1,31 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
-<head> <!-- Start of "head" section  -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>  Email  </title>
-    
-    
-    <!-- Next line is for Step 5, to link the stylesheet to the HTML page. We will use "link" for this  -->
-    <link rel="" href="">
-           <!-- rel="stylesheet" specifies the relationship (rel) between the HTML document and the linked file.  
-                href="style.css" specifies the location (href) of the external file.
-                For example: -->
-                 <link rel="stylesheet" href="style.css">
-       
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário de Contato</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-</head> <!-- End of "head" section  -->
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+    }
+
+    nav {
+      text-align: center;
+      padding: 1rem;
+      background-color: #eee;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #007BFF;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+      padding: 1rem;
+    }
+
+    section {
+      width: 100%;
+      max-width: 600px;
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    form > div {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    textarea {
+      resize: vertical;
+    }
+
+    .botao-enviar {
+      display: block;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #007BFF;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .botao-enviar:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
 
 <body>
-    <nav>
-    </nav>
-    <form action="/action_page.php">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"><br><br>
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject"><br><br>
-        <input type="submit" value="Submit">
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../CV/cv.html">Currículo</a>
+  </nav>
+  
+  <main>
+    <section>
+      <h1>Entre em contato</h1>
+      <form action="/action_page.php" method="POST">
+        
+        <div>
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo" />
+        </div>
+
+        <div>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com" />
+        </div>
+
+        <div>
+          <label for="assunto">Assunto:</label>
+          <input type="text" id="assunto" name="assunto" required placeholder="Informe o assunto" />
+        </div>
+
+        <div>
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="mensagem" rows="5" required placeholder="Escreva aqui sua mensagem..."></textarea>
+        </div>
+
+        <div>
+          <input class="botao-enviar" type="submit" value="Enviar">
+        </div>
+
       </form>
-    
-</body> <!-- End of "body" section  -->
+    </section>
+  </main>
+</body>
 </html>
