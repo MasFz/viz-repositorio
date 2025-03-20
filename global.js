@@ -5,7 +5,7 @@ let pages = [
     {url: "/", title: "Home"},
     {url: "/projects/projects.html", title: "Projects"},
     {url: "/contact/contact.html", title: "Contact"},
-    {url: "/cv/cv.html", title: "cv"},
+    {url: "/cv/cv.html", title: "Cv"},
 ]
 
 let nav = document.createElement("nav");
@@ -13,7 +13,8 @@ document.body.prepend(nav);
 
 let ul = document.createElement("ul");
 nav.appendChild(ul);
-nav.classList.add("nav-menu")
+ul.classList.add("nav-menu")
+
 
 for (let p of pages) {
     let a = document.createElement("a");
