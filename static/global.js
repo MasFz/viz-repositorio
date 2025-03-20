@@ -3,9 +3,9 @@ console.log("IT'S ALIVE!!!")
 
 let pages = [
     {url: "/", title: "Home"},
-    {url: "/projects/projects.html", title: "Projects"},
-    {url: "/contact/contact.html", title: "Contact"},
-    {url: "/cv/cv.html", title: "Cv"},
+    {url: "/projects", title: "Projects"},
+    {url: "/contact", title: "Contact"},
+    {url: "/cv", title: "Cv"},
 ]
 
 let nav = document.createElement("nav");
