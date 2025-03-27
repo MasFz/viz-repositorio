@@ -10,7 +10,7 @@
     <h1>Marcelo Angelo</h1>
     <p>Aluno de Ciência de Dados</p>
     <figure>
-      <img src="images/my_image.jpeg" alt="Foto de Marcelo Angelo">
+      <img src="images/my_image.jpeg" alt="Fotinha do pai 😎">
     </figure>
   </section>
 </main>

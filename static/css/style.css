@@ -1,74 +1,103 @@
+/* Definição das variáveis para o tema Light (padrão) */
+:root {
+  --background: #fff;
+  --text: #333;
+  --nav-background: #eee;
+  --link-color: #333;
+  --link-hover: #007BFF;
+  --footer-text: #777;
+  --footer-border: #ddd;
+}
+
+/* Variáveis para o tema Dark */
+[data-theme="dark"] {
+  --background: #121212;
+  --text: #e0e0e0;
+  --nav-background: #1e1e1e;
+  --link-color: #e0e0e0;
+  --link-hover: #bb86fc;
+  --footer-text: #999;
+  --footer-border: #333;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    background-color: #fff;
-    color: #333;
-    margin: 0 auto;
-    max-width: 100ch;
-    padding: 20px;
-  }
-  
-  .nav-menu {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    background-color: #eee;
-    padding: 1rem;
-  }
-  
-  .nav-menu li {
-    margin: 0 10px;
-  }
-  
-  .nav-menu li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding: 5px;
-  }
-  
-  .nav-menu li a:hover,
-  .nav-menu li a.current {
-    color: #007BFF;
-    border-bottom: 3px solid #007BFF;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  main {
-    padding: 20px;
-  }
-  
-  .intro {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .intro h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-  }
-  
-  .intro p {
-    font-size: 1.2em;
-    margin-bottom: 20px;
-  }
-  
-  footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 10px;
-    font-size: 0.9em;
-    color: #777;
-    border-top: 1px solid #ddd;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: var(--background);
+  color: var(--text);
+  margin: 0 auto;
+  max-width: 100ch;
+  padding: 20px;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  background-color: var(--nav-background);
+  padding: 1rem;
+}
+
+.nav-menu li {
+  margin: 0 10px;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: var(--link-color);
+  font-weight: bold;
+  padding: 5px;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.current {
+  color: var(--link-hover);
+  border-bottom: 3px solid var(--link-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+main {
+  padding: 20px;
+}
+
+.intro {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.intro h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.intro p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 10px;
+  font-size: 0.9em;
+  color: var(--footer-text);
+  border-top: 1px solid var(--footer-border);
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  gap: 5px;
+}

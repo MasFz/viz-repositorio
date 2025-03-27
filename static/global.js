@@ -1,40 +1,40 @@
-console.log("IT'S ALIVE!!!")
+// console.log("IT'S ALIVE!!!")
 
 
-let pages = [
-    {url: "/", title: "Home"},
-    {url: "/projects", title: "Projects"},
-    {url: "/contact", title: "Contact"},
-    {url: "/cv", title: "Cv"},
-]
+// let pages = [
+//     {url: ".", title: "Home"},
+//     {url: "projects", title: "Projects"},
+//     {url: "contact", title: "Contact"},
+//     {url: "cv", title: "Cv"},
+// ]
 
-let nav = document.createElement("nav");
-document.body.prepend(nav);
+// let nav = document.createElement("nav");
+// document.body.prepend(nav);
 
-let ul = document.createElement("ul");
-nav.appendChild(ul);
-ul.classList.add("nav-menu")
+// let ul = document.createElement("ul");
+// nav.appendChild(ul);
+// ul.classList.add("nav-menu")
 
 
-for (let p of pages) {
-    let a = document.createElement("a");
-    let li = document.createElement("li");
-    li.appendChild(a)
-    a.href=p.url;
-    a.innerText=p.title;
-    ul.appendChild(li);
-}
+// for (let p of pages) {
+//     let a = document.createElement("a");
+//     let li = document.createElement("li");
+//     li.appendChild(a)
+//     a.href=p.url;
+//     a.innerText=p.title;
+//     ul.appendChild(li);
+// }
 
-function $$ (selector, context = document){
-    return Array.from(context.querySelectorAll(selector));
-}
+// function $$ (selector, context = document){
+//     return Array.from(context.querySelectorAll(selector));
+// }
 
-let navLinks = $$("nav a");
+// let navLinks = $$("nav a");
 
-let currentLink = navLinks.find(a => a.host === location.host && a.pathname === location.pathname);
+// let currentLink = navLinks.find(a => a.host === location.host && a.pathname === location.pathname);
 
-currentLink.classList.add("current");
+// currentLink.classList.add("current");
 
-if (currentLink) {
-    currentLink.classList.add("current");
-}
+// if (currentLink) {
+//     currentLink.classList.add("current");
+// }
