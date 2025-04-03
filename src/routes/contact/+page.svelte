@@ -3,8 +3,8 @@
 </svelte:head>
 
 <header>
-
 </header>
+
 <main>
   <section class="contact-form">
     <h1>Entre em contato</h1>
@@ -29,13 +29,15 @@
     </form>
   </section>
 </main>
+
 <footer>
   <p>&copy; 2025 Marcelo Angelo. Todos os direitos reservados.</p>
 </footer>
+
 <style>
-    .contact-form {
+  .contact-form {
     max-width: 600px;
-    background-color: #fff;
+    background-color: var(--card-background);
     margin: 40px auto;
     padding: 2rem;
     border-radius: 6px;
@@ -55,6 +57,8 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
+    /* Utiliza a variável de texto para garantir a legibilidade em ambos os temas */
+    color: var(--text);
   }
   
   .form-group input[type="text"],
@@ -65,6 +69,8 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: var(--background);
+    color: var(--text);
   }
   
   .form-group textarea {
@@ -75,8 +81,8 @@
     display: block;
     width: 100%;
     padding: 0.75rem;
-    background-color: #007BFF;
-    color: #fff;
+    background-color: var(--link-hover);
+    color: var(--background);
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -86,7 +92,6 @@
   }
   
   .btn-submit:hover {
-    background-color: #0056b3;
+    background-color: var(--link-color);
   }
-  
 </style>

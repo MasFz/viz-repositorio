@@ -1,64 +1,90 @@
 <svelte:head>
-  <title>Projetos</title>
+  <title>My projects</title>
 </svelte:head>
+<script>
+    import projects from "$lib/projects.json";
+    import Project from "$lib/Project.svelte";
+    import Pie from "$lib/Pie.svelte";
+    import * as d3 from "d3"
 
-<header>
+    let query = "";
 
-</header>
-<main>
-  <section class="projects">
-    <h1>Projetos</h1>
-    <article class="project-item">
-      <h2>Projeto 1</h2>
-      <p>Descrição do projeto 1.</p>
-      <a href="#" class="btn-view">Ver projeto</a>
-    </article>
-    <article class="project-item">
-      <h2>Projeto 2</h2>
-      <p>Descrição do projeto 2.</p>
-      <a href="#" class="btn-view">Ver projeto</a>
-    </article>
-  </section>
-</main>
-<footer>
-  <p>&copy; 2025 Marcelo Angelo. Todos os direitos reservados.</p>
-</footer>
+    $: filteredProjects = projects.filter(project => {
+        let values = Object.values(project).join("\n").toLowerCase();
+        return values.includes(query.toLowerCase());
+    });
+
+    let pieData;
+
+$: {
+    pieData = {};
+    
+    let rolledData = d3.rollups(filteredProjects, v => v.length, d => d.year);
+
+    pieData = rolledData.map(([year, count]) => {
+        return { value: count, label: year };
+    });
+}
+
+
+</script>
+
+<Pie data={pieData}/>
+
+<input type="search" bind:value={query} aria-label="Search projects" placeholder="🔍 Search projects..." />
+
+<h1>{ projects.length} Projects</h1>
+<div class="projects">
+    {#each filteredProjects as p}
+        <Project data={p}/>
+      <!-- <article>
+        <h2>{p.title}</h2>
+        <img src={p.image} alt="" />
+        <p>
+            {p.description}
+        </p>
+      </article> -->
+    {/each}
+</div>
+
 <style>
     .projects {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
-  }
-  
-  .projects h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .project-item {
-    background-color: #fff;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 6px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .project-item h2 {
-    margin-bottom: 10px;
-  }
-  
-  .btn-view {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 15px;
-    background-color: #007BFF;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 4px;
-  }
-  
-  .btn-view:hover {
-    background-color: #0056b3;
-  }
-  
+        display: flex;
+        flex-wrap: wrap;
+    }
 </style>
+  
+
+<!-- .projects>article*6>h2>lorem4^img[src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg"]+p>lorem -->
+<!-- <div class="projects">
+    <article>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus nesciunt reiciendis possimus dicta doloremque amet sunt aspernatur deserunt sequi! Est hic nesciunt libero natus modi earum maiores aut cum incidunt.</p>
+    </article>
+    <article>
+        <h2>Voluptatibus sint eos consequuntur.</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Quasi et culpa suscipit, alias quaerat fuga natus eos nulla cupiditate cumque eum voluptatem repellendus dignissimos aut fugiat harum ducimus quibusdam corporis, molestiae expedita ullam hic. Debitis in fugiat nam?</p>
+    </article>
+    <article>
+        <h2>Ab, tenetur aperiam! Id?</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Cupiditate quibusdam repellat excepturi facilis aperiam, illum alias architecto aspernatur culpa in a mollitia non laboriosam, odio veritatis totam eum et tenetur quidem nemo inventore. Eos sint quia similique? Similique?</p>
+    </article>
+    <article>
+        <h2>Omnis perferendis doloribus qui!</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Blanditiis eos perferendis, cupiditate accusantium vero adipisci itaque, animi eius voluptatum dolore sapiente ipsum omnis vel in cum nesciunt repellendus a error! Vero ducimus amet fugiat praesentium. Vero, asperiores numquam.</p>
+    </article>
+    <article>
+        <h2>Omnis totam assumenda maiores!</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Error ullam laboriosam nostrum eos soluta mollitia reprehenderit nulla eaque, cumque et voluptates, voluptatibus adipisci, quod eligendi dolorem asperiores tempore laborum laudantium cupiditate provident cum! Possimus ex similique odio autem?</p>
+    </article>
+    <article>
+        <h2>Qui consequuntur dolore quis?</h2>
+        <img src="https://i.etsystatic.com/iap/a0f246/5502938083/iap_640x640.5502938083_69958kp0.jpg" alt="">
+        <p>Tempore, culpa consequatur voluptatem quam, repellat inventore alias nam ut incidunt obcaecati qui neque eaque illum nostrum totam ipsa quae quaerat sint quis reiciendis omnis natus placeat quibusdam? Ut, assumenda.</p>
+    </article>
+</div>  -->

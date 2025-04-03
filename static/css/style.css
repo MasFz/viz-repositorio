@@ -1,4 +1,3 @@
-/* Definição das variáveis para o tema Light (padrão) */
 :root {
   --background: #fff;
   --text: #333;
@@ -7,9 +6,9 @@
   --link-hover: #007BFF;
   --footer-text: #777;
   --footer-border: #ddd;
+  --card-background: #fff;
 }
 
-/* Variáveis para o tema Dark */
 [data-theme="dark"] {
   --background: #121212;
   --text: #e0e0e0;
@@ -18,7 +17,14 @@
   --link-hover: #bb86fc;
   --footer-text: #999;
   --footer-border: #333;
+  --card-background: #2a2a2a;
 }
+
+[data-theme="dark"] .project-item,
+[data-theme="dark"] .card {
+  color: #fff;
+}
+
 
 * {
   margin: 0;
@@ -28,9 +34,9 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
   background-color: var(--background);
   color: var(--text);
+  line-height: 1.6;
   margin: 0 auto;
   max-width: 100ch;
   padding: 20px;
@@ -42,6 +48,8 @@ body {
   justify-content: center;
   background-color: var(--nav-background);
   padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .nav-menu li {
@@ -100,4 +108,22 @@ footer {
   right: 1rem;
   display: inline-flex;
   gap: 5px;
+}
+
+.card,
+.project-item {
+  background-color: var(--card-background);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.card:hover,
+.project-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
