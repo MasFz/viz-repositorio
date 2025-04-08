@@ -6,7 +6,8 @@
       { url: "/", title: "Home" },
       { url: "/projects", title: "Projects" },
       { url: "/contact", title: "Contact" },
-      { url: "/cv", title: "Cv" }
+      { url: "/cv", title: "Cv" },
+      { url: "/meta", title: "Meta" }
     ];
   
     let storage = globalThis.localStorage ?? {};

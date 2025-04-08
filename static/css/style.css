@@ -7,6 +7,7 @@
   --footer-text: #777;
   --footer-border: #ddd;
   --card-background: #fff;
+  --border-gray: #ccc;
 }
 
 [data-theme="dark"] {
@@ -18,6 +19,7 @@
   --footer-text: #999;
   --footer-border: #333;
   --card-background: #2a2a2a;
+  --border-gray: #888;
 }
 
 [data-theme="dark"] .project-item,
