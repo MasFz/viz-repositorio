@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { computePosition, autoPlacement, offset } from "@floating-ui/dom";
     import Bar from "$lib/Bar.svelte";
+    import { base } from "$app/paths";
   
     let data = [], commits = [];
     let hoveredIndex = -1, tooltipPosition = { x: 0, y: 0 }, commitTooltip;
@@ -13,52 +14,58 @@
     usableArea.width = usableArea.right - usableArea.left;
     usableArea.height = usableArea.bottom - usableArea.top;
     let xAxis, yAxis, yAxisGridlines;
-    
+  
     onMount(async () => {
-      data = await d3.csv("/loc.csv", row => ({
-        ...row,
-        line: +row.line,
-        depth: +row.depth,
-        length: +row.length,
-        date: new Date(row.date + "T00:00" + row.timezone),
-        datetime: new Date(row.datetime)
-      }));
-      commits = d3.groups(data, d => d.commit).map(([commit, lines]) => {
-        const { author, date, time, timezone, datetime } = lines[0];
-        const ret = {
-          id: commit,
-          url: "https://github.com/USERNAME/REPO/commit/" + commit,
-          author, date, time, timezone, datetime,
-          hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
-          totalLines: lines.length
-        };
-        Object.defineProperty(ret, "lines", { value: lines, configurable: true, writable: true, enumerable: false });
-        return ret;
-      });
-      commits = d3.sort(commits, d => -d.totalLines);
+      try {
+        data = await d3.csv(`${base}/loc.csv`, row => ({
+          ...row,
+          line: +row.line,
+          depth: +row.depth,
+          length: +row.length,
+          date: new Date(row.date + "T00:00" + row.timezone),
+          datetime: new Date(row.datetime)
+        }));
+        console.log("Dados carregados:", data);
+        commits = d3.groups(data, d => d.commit).map(([commit, lines]) => {
+          const { author, date, time, timezone, datetime } = lines[0];
+          const ret = {
+            id: commit,
+            url: "https://github.com/USERNAME/REPO/commit/" + commit,
+            author, date, time, timezone, datetime,
+            hourFrac: datetime.getHours() + datetime.getMinutes() / 60,
+            totalLines: lines.length
+          };
+          Object.defineProperty(ret, "lines", { value: lines, configurable: true, writable: true, enumerable: false });
+          return ret;
+        });
+        commits = d3.sort(commits, d => -d.totalLines);
+        console.log("Commits:", commits);
+      } catch (e) {
+        console.error("Erro ao carregar o CSV:", e);
+      }
     });
-    
+  
     $: minDate = d3.min(commits, d => d.date);
     $: maxDate = d3.max(commits, d => d.date);
     $: maxDatePlusOne = maxDate && new Date(new Date(maxDate).setDate(new Date(maxDate).getDate() + 1));
-    
+  
     $: xScale = d3.scaleTime().domain([minDate, maxDatePlusOne]).range([usableArea.left, usableArea.right]).nice();
     $: yScale = d3.scaleLinear().domain([24, 0]).range([usableArea.bottom, usableArea.top]);
     $: rScale = d3.scaleSqrt().domain(d3.extent(commits, d => d.totalLines)).range([2, 30]);
-    
+  
     $: {
       if (xAxis && yAxis) {
         d3.select(xAxis).call(d3.axisBottom(xScale));
         d3.select(yAxis).call(d3.axisLeft(yScale).tickFormat(d => `${String(d % 24).padStart(2, "0")}:00`));
       }
     }
-    
+  
     $: {
       if (yAxisGridlines) {
         d3.select(yAxisGridlines).call(d3.axisLeft(yScale).tickFormat("").tickSize(-usableArea.width));
       }
     }
-    
+  
     async function dotInteraction(index, evt) {
       if (evt.type === "mouseenter") {
         hoveredIndex = index;
@@ -75,7 +82,7 @@
           : [...clickedCommits, commit];
       }
     }
-    
+  
     $: allTypes = Array.from(new Set(data.map(d => d.type)));
     $: selectedLines = (clickedCommits.length > 0 ? clickedCommits : commits).flatMap(d => d.lines);
     $: selectedCounts = d3.rollup(selectedLines, v => v.length, d => d.type);
@@ -120,11 +127,7 @@
   <style>
     svg { overflow: visible; }
     .gridlines { stroke-opacity: 0.2; }
-    circle {
-      transition: 200ms;
-      transform-origin: center;
-      transform-box: fill-box;
-    }
+    circle { transition: 200ms; transform-origin: center; transform-box: fill-box; }
     circle:hover { transform: scale(1.5); }
     .selected { fill: var(--color-accent); }
     .info {
